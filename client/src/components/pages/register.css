@@ -1,0 +1,48 @@
+
+.formdiv{ 
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgb(2, 2, 2);
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+    padding: 20px 0px;
+
+    align-items: center;
+}
+
+.registerForm>.nameInput {
+    margin-top: 20px;
+}
+
+.registerForm>h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    margin: 10px 0px;
+    color: forestgreen;
+
+}
+
+
+
+.registerForm>input {
+    min-width: 50%;
+    padding: 7px 10px;
+    border-radius: 3px;
+    /* outline-style: none; */
+    border: 1px solid black;
+
+}
+
+
+.registerForm>.submitBtn {
+    min-width: 15%;
+    margin-top: 10px;
+    border: 0px;
+    background-color: rgb(80, 255, 27);
+    color: black;
+}
