@@ -16,11 +16,11 @@ import Login from './components/pages/login'
 
 const App = () => {
   return (
-    <div>
+    <div className='min-h-screen w-full p-0 m-0 relative '>
 
       <BrowserRouter>
-        <Header />
-        {/* <Header01></Header01> */}
+        <Header01></Header01>
+        {/* <Header /> */}
         <Routes>
 
           <Route path="/" element={<Homepage />} />
@@ -31,8 +31,8 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
-      <Footer/> 
-      {/* <Footer01 /> */}
+      {/* <Footer/>  */}
+      <Footer01 />
 
 
     </div>

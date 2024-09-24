@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./register.css"
+// import "./register.css"
 // import { toast } from 'react-toastify';
 import { toast } from 'react-hot-toast';
 import axios from 'axios'
@@ -36,14 +36,14 @@ const RegisterForm = () => {
     return (
 
 
-        <div className='formdiv '>
+        <div className='formdiv min-h-screen '>
 
             <form onSubmit={submithandle}  className='registerForm flex flex-col gap-5 w-full justify-center items-center
-    h-full  py-10'>
+           py-10 h-full border-2 border-red-500 text-black bg-zinc-300'>
 
-                <h1 className='text-4xl title'> Register  </h1>
+                <h1 className='text-4xl title text-black'> Register  </h1>
 
-                <input className='nameInput px-4 max-w-[50%] py-2 rounded-md outline-none bg-snow-200 mt-[20px]'
+                <input className='nameInput px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 mt-[20px]'
                     value={name}
                     required name="name" placeholder='Enter your name' type="text"
                     onChange={(e) => {
@@ -51,31 +51,31 @@ const RegisterForm = () => {
                     }}
                 />
 
-                <input className='px-4 max-w-[50%] py-2 rounded-md outline-none bg-snow-200 ' required name="email" placeholder='Email' type="email" value={email}
+                <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="email" placeholder='Email' type="email" value={email}
                     onChange={(e) => {
                         setEmail(e.target.value.trim())
                     }}
                 />
 
-                <input className='px-4 max-w-[50%] py-2 rounded-md outline-none bg-snow-200 ' required name="password" placeholder='Password' type="password" value={password}
+                <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="password" placeholder='Password' type="password" value={password}
                     onChange={(e) => {
                         setPassword(e.target.value.trim())
                     }}
                 />
 
-                <input className='px-4 max-w-[50%] py-2 rounded-md outline-none bg-snow-200 ' required name="number" placeholder='Enter your number' type="text" value={phone}
+                <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="number" placeholder='Enter your number' type="text" value={phone}
                     onChange={(e) => {
                         setPhone(e.target.value.trim())
                     }}
                 />
 
-                <input className='px-4 max-w-[50%] py-2 rounded-md outline-none bg-snow-200 ' required name="address" placeholder='Enter your address' type="text" value={address}
+                <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="address" placeholder='Enter your address' type="text" value={address}
                     onChange={(e) => {
                         setaddress(e.target.value.trim())
                     }}
                 />
 
-                <input type='submit' value="Submit" className='submitBtn px-5 max-w-[20%] py-2 rounded-md' />
+                <input type='submit' value="Submit" className='submitBtn mt-10 px-5 min-w-[20%] py-1.5 rounded-md bg-blue-600' />
 
             </form>
 
