@@ -35,6 +35,7 @@ const Login = () => {
     
 
                 console.log(auth.user,auth.token)
+                localStorage.setItem("auth",JSON.stringify(response.data))
                 Navigate("/")
             }
 

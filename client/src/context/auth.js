@@ -27,7 +27,8 @@
 // export {AuthProvider,useAuth}
 
 
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
+// import { json } from "react-router-dom";
 
 // Create the Auth Context
 const AuthContext = createContext();
@@ -38,14 +39,32 @@ const AuthProvider = ({ children }) => {
         user: null,
         token: null, // Initialize token to null or provide a default value
     });
-    const [data, setData] = useState([
 
-    ]
 
-    )
+    useEffect(()=>{
+let data=localStorage.getItem("auth");
+if(data){
+    let dataparse=JSON.parse(data)
+setAuth({
+...auth,
+user:dataparse.user,
+token:dataparse.token
+})
+}
+    },["auth"])
+
+
+
+
+    console.log();
+
+
+
+
+
 
     return (
-        <AuthContext.Provider value={[auth, setAuth, data, setData]}>
+        <AuthContext.Provider value={[auth, setAuth]}>
             {children} {/* Use children prop here */}
         </AuthContext.Provider>
     );
