@@ -11,6 +11,8 @@ import Footer01 from './components/pages/footer01'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/pages/login'
+import Dashboard from './components/user/Dashboard'
+import PrivateRoute from './components/routes/PrivateRoute'
 
 // change
 
@@ -25,6 +27,11 @@ const App = () => {
 
           <Route path="/" element={<Homepage />} />
           <Route path="/policy" element={<Policy />} />
+
+          {/* <Route  /> */}
+          <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path="" element={<Dashboard />} />
+          </Route>
           <Route path="/*" element={<PagenotFound />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<Login />} />

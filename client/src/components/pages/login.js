@@ -24,8 +24,7 @@ const Login = () => {
             toast.success("form submitted successfully through react toaster ")
 
 
-          
-
+        
             if (response.data.success) {
                 setAuth({
                     // ...auth,
@@ -53,6 +52,7 @@ const Login = () => {
 
 
             <form onSubmit={handleSubmit} className='w-full min-h-[70vh] flex flex-col items-center gap-3 p-4 border text-black'>
+
                 <h1 className='text-4xl font-normal my-10 text-blue-500'> Login </h1>
 
 
@@ -61,6 +61,7 @@ const Login = () => {
                         setEmail(e.target.value)
                     }}
                 />
+
                 <input className='py-1 min-w-[23%] px-4 rounded-sm outline-none mt-4 ' type="password" placeholder='Password'
                     onChange={(e) => {
                         setPassword(e.target.value)

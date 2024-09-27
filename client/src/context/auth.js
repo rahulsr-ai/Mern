@@ -27,6 +27,7 @@
 // export {AuthProvider,useAuth}
 
 
+import axios from "axios";
 import React, { useState, useEffect, useContext, createContext } from "react";
 // import { json } from "react-router-dom";
 
@@ -39,19 +40,21 @@ const AuthProvider = ({ children }) => {
         user: null,
         token: null, // Initialize token to null or provide a default value
     });
+    
+axios.defaults.headers.common['Authorization']=auth?.token
 
-
-    useEffect(()=>{
-let data=localStorage.getItem("auth");
-if(data){
-    let dataparse=JSON.parse(data)
-setAuth({
-...auth,
-user:dataparse.user,
-token:dataparse.token
-})
-}
-    },["auth"])
+    useEffect(() => {
+        let data = localStorage.getItem("auth");
+        if (data) {
+            let dataparse = JSON.parse(data)
+            setAuth({
+                ...auth,
+                user: dataparse.user,
+                token: dataparse.token
+            })
+        }
+        // eslint-disable-next-line
+    }, [])
 
 
 
