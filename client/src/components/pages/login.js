@@ -53,6 +53,7 @@ const Login = () => {
 
             <form onSubmit={handleSubmit} className='w-full min-h-[70vh] flex flex-col items-center gap-3 p-4 border text-black'>
 
+             
                 <h1 className='text-4xl font-normal my-10 text-blue-500'> Login </h1>
 
 
@@ -68,9 +69,11 @@ const Login = () => {
                     }}
 
                 />
+                
 
 
                 <input className='py-1 min-w-[10%] bg-green-500 px-4 rounded-sm mt-10 ' type="submit" value="Login" />
+                <input className='py-1 min-w-[10%] bg-green-500 px-4 rounded-sm mt-5 cursor-grab ' type="button" value="forget" onClick={()=>Navigate("/forgetPassword")}/>
 
             </form>
 

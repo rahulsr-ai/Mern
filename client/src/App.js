@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/pages/login'
 import Dashboard from './components/user/Dashboard'
 import PrivateRoute from './components/routes/PrivateRoute'
+import ForgetPassword from './components/pages/ForgetPassword'
 
 // change
 
@@ -34,6 +35,7 @@ const App = () => {
           </Route>
           <Route path="/*" element={<PagenotFound />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/login" element={<Login />} />
 
         </Routes>

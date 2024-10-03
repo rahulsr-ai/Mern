@@ -12,6 +12,7 @@ const RegisterForm = () => {
     const [password, setPassword] = useState("")
     const [phone, setPhone] = useState("")
     const [address, setaddress] = useState("")
+    const [answar, setAnswar] = useState("")
 
 
     const submithandle = async (e) => {
@@ -20,7 +21,7 @@ const RegisterForm = () => {
         
         try {
             const response = await axios.post(`/api/v1/auth/register`,
-                { name, email, password, phone, address });
+                { name, email, password, phone, address,answar });
                 if (response.data.success) {
                     navigate("/login"); }
                     toast.success('successfully submited');
@@ -72,6 +73,11 @@ const RegisterForm = () => {
                 <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="address" placeholder='Enter your address' type="text" value={address}
                     onChange={(e) => {
                         setaddress(e.target.value.trim())
+                    }}
+                />
+                <input className='px-4 min-w-[30%] py-1.5 rounded-md outline-none bg-snow-200 ' required name="answar" placeholder='Enter your fevroite sports' type="text" value={answar}
+                    onChange={(e) => {
+                        setAnswar(e.target.value.trim())
                     }}
                 />
 

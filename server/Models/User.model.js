@@ -22,6 +22,10 @@ address:{
     type:String,
     required:true,
 },
+answar:{
+    type:String,
+    required:true,
+},
 role:{
     type:Number,
     default:0

@@ -8,9 +8,9 @@ import JWT from 'jsonwebtoken'
 export const registerController = async (req, res) => {
 
     try {
-         console.log('passed');
-         
-        let { name, email, password, phone, address } = req.body;
+        console.log('passed');
+
+        let { name, email, password, phone, address, answar } = req.body;
 
         if (!name) {
             return res.send({ message: 'name is required' })
@@ -26,6 +26,9 @@ export const registerController = async (req, res) => {
         }
         if (!phone) {
             return res.send({ message: 'phone is required' })
+        }
+        if (!answar) {
+            return res.send({ message: 'answar is required' })
         }
 
         // CHEKING IS THERE ANY USER IN THE DB WIH THE PROVIDED EMAIL 
@@ -45,14 +48,14 @@ export const registerController = async (req, res) => {
         const hashedPassword = await hashPassword(password);
 
         // Here we creating new user in the MONGO DATABASE 
-        const user = await new User({ name, email, password: hashedPassword, phone, address,  })
+        const user = await new User({ name, email, password: hashedPassword, phone, address, answar })
         await user.save()
 
         return res.status(200).send({
             success: true,
             message: 'users registerd'
-        }) 
-        
+        })
+
 
 
     }
@@ -88,7 +91,7 @@ export const authLogin = async (req, res) => {
 
         }
 
-        
+
         let user = await User.findOne({ email });
 
         if (!user) {
@@ -114,7 +117,7 @@ export const authLogin = async (req, res) => {
         })
 
 
-       
+
 
         res.status(200).json({
             success: true,
@@ -141,6 +144,50 @@ export const authLogin = async (req, res) => {
         })
     }
 
+}
+
+export const forgetPassword = async (req, res) => {
+    try {
+        const { email, answar, newPassword } = req.body;
+        if (!email) {
+            return res.status(400).send({ message: "email is required" })
+        }
+        if (!newPassword) {
+            return res.status(400).send({ message: "newpassword is required" })
+        }
+        if (!answar) {
+            return res.status(400).send({ message: "answar is required" })
+        }
+        //
+        // check
+        let user = await User.findOne({ email, answar })
+        //validation
+        if (!user) {
+            return res.status(404).send({
+                success: false,
+                message: "invalid email or password"
+            })
+        }
+
+        const hashed = await hashPassword(newPassword);
+
+        let changed = await User.findByIdAndUpdate(user._id, { password: hashed }, { new: true });
+
+        console.log('changed password successfully???');
+
+        res.status(200).send({
+            success: true,
+            message: "you have changed password successfully."
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "error in forgetpassword",
+            error: error.message
+        })
+    }
 }
 
 export const usertest = async (req, res) => {
