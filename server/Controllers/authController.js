@@ -125,7 +125,8 @@ export const authLogin = async (req, res) => {
             user: {
                 email: user.email,
                 name: user.name,
-                password: user.password
+                password: user.password,
+                role:user.role
             }
             , token
 

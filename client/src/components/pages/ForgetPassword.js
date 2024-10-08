@@ -27,7 +27,7 @@ const ForgetPassword = () => {
             toast.success("form submitted successfully through react toaster ")
 
             console.log('navigating user');
-            Navigate("/")
+            Navigate("/PassChange")
 
 
 

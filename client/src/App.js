@@ -14,6 +14,8 @@ import Login from './components/pages/login'
 import Dashboard from './components/user/Dashboard'
 import PrivateRoute from './components/routes/PrivateRoute'
 import ForgetPassword from './components/pages/ForgetPassword'
+import PassChange from './components/pages/PassChange'
+import AdminRoute from './components/routes/AdminRoute'
 
 // change
 
@@ -29,14 +31,19 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/policy" element={<Policy />} />
 
-          {/* <Route  /> */}
+        
           <Route path="/dashboard" element={<PrivateRoute />}>
-            <Route path="" element={<Dashboard />} />
+            <Route path="user" element={<Dashboard />} />
           </Route>
+          <Route path="/dashboard" element={<AdminRoute />}>
+            <Route path="admin" element={<Dashboard />} />
+          </Route>
+
           <Route path="/*" element={<PagenotFound />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/PassChange" element={<PassChange />} />
 
         </Routes>
       </BrowserRouter>

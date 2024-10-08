@@ -39,9 +39,11 @@ const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({
         user: null,
         token: null, // Initialize token to null or provide a default value
+
     });
-    
-axios.defaults.headers.common['Authorization']=auth?.token
+    // const [isLogin, setisLogin] = useState(false);
+
+    axios.defaults.headers.common['Authorization'] = auth?.token
 
     useEffect(() => {
         let data = localStorage.getItem("auth");
@@ -59,18 +61,18 @@ axios.defaults.headers.common['Authorization']=auth?.token
 
 
 
-    console.log();
-
-
-
-
-
+  
 
     return (
-        <AuthContext.Provider value={[auth, setAuth]}>
+        <AuthContext.Provider value={[auth, setAuth, isLogin, setisLogin]}>
             {children} {/* Use children prop here */}
         </AuthContext.Provider>
     );
+
+
+
+
+
 };
 
 // Custom hook to use auth context

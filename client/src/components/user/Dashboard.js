@@ -8,6 +8,7 @@ const Dashboard = () => {
     return (
         <pre>
             {JSON.stringify(auth, null, 4)}
+            <h1>this is dashboard</h1>
 
         </pre>
     )
