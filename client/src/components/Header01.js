@@ -4,15 +4,15 @@ import { useAuth } from '../context/auth'
 import toast from 'react-hot-toast';
 const Header01 = () => {
     const [auth, setAuth, isLogin, setisLogin] = useAuth();
-    
-    
+
+
     function logout() {
         setAuth({
             ...auth,
             user: null, token: null
 
         })
-        setisLogin(false)
+
 
 
         localStorage.removeItem("auth")
@@ -30,52 +30,50 @@ const Header01 = () => {
                 <Link to="/register"> Register </Link>
 
 
-{/*                 
+
                 {
-                    isLogin === false ?  (
+                    !auth?.token ? (
                         <button className='ml-9 px-3 py-[2px] rounded-sm bg-green-400'
 
                         >   <Link to="/login"> Login </Link>
                         </button>
-                    )
-                        :
-                        (<>
-                            <div className="relative group ">
+                    ) : (
 
-                                <button
-                                    onClick={logout}
-                                    className="bg-red-500 text-white px-4 py-[2px] rounded">
-                                    <Link to="/login"> {auth?.user?.role === 1 ? "admin" : "user"} </Link>  </button>
 
-                                <div className="absolute right-[0] mt-1 w-48 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
 
-                                    <ul className="text-black">
 
-                                        <li className="px-4 py-2 hover:bg-gray-200">
-                                            <NavLink to={auth?.user?.role === 1 ? "dashboard/admin" : "dashboard/user"}> DashBoard </NavLink>
+                        <div className="relative group ">
 
-                                        </li>
+                            <button
+                                // onClick={logout}
+                                className="bg-red-500 text-white px-4 py-[2px] rounded">
+                                <Link > {auth?.user?.role === 1 ? "admin" : "user"} </Link>  </button>
 
-                                        <li onClick={logout} className="px-4 py-2 hover:bg-gray-200">
-                                            <Link to="/login"> LogOut </Link>
+                            <div className="absolute right-[0] mt-1 w-48 bg-white border border-gray-300 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto">
 
-                                        </li>
+                                <ul className="text-black">
 
-                                    </ul>
+                                    <li className="px-4 py-2 hover:bg-gray-200">
+                                        <NavLink to={auth?.user?.role === 1 ? "dashboard/admin" : "dashboard/user"}> DashBoard </NavLink>
 
-                                </div>
+                                    </li>
+
+                                    <li  className="px-4 py-2 hover:bg-gray-200">
+                                        <Link onClick={logout} to="/login"> LogOut </Link>
+
+                                    </li>
+
+                                </ul>
 
                             </div>
 
+                        </div>
 
 
-                        </>
 
-                        )
+                    )
                 }
-                 */}
 
-                 
                 <button className='px-3 py-[2px] rounded-sm bg-yellow-500'>   <Link to="/*"> Cart </Link>  </button>
 
             </div>
@@ -87,3 +85,5 @@ const Header01 = () => {
 }
 
 export default Header01
+
+

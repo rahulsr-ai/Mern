@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -16,10 +16,22 @@ import PrivateRoute from './components/routes/PrivateRoute'
 import ForgetPassword from './components/pages/ForgetPassword'
 import PassChange from './components/pages/PassChange'
 import AdminRoute from './components/routes/AdminRoute'
+import AdminDashboard from './components/pages/Admin/AdminDashboard'
+
+
+import { useAuth } from './context/auth'
 
 // change
 
 const App = () => {
+  const [isLogin, setisLogin] = useAuth()
+  useEffect(()=> { 
+  
+    
+
+  },[isLogin])
+
+
   return (
     <div className='min-h-screen w-full p-0 m-0 relative '>
 
@@ -36,7 +48,7 @@ const App = () => {
             <Route path="user" element={<Dashboard />} />
           </Route>
           <Route path="/dashboard" element={<AdminRoute />}>
-            <Route path="admin" element={<Dashboard />} />
+            <Route path="admin" element={<AdminDashboard />} />
           </Route>
 
           <Route path="/*" element={<PagenotFound />} />

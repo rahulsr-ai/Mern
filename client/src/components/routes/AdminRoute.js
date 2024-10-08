@@ -26,7 +26,7 @@ useEffect(()=>{
 
 },[auth?.token]);
 
-return ok ? <Outlet/>: <ReDirecting/>;
+return ok ? <Outlet/>: <ReDirecting path="login"/>;
 }
 
 

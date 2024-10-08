@@ -73,11 +73,12 @@ const Login = () => {
 
 
                 <input className='py-1 min-w-[10%] bg-green-500 px-4 rounded-sm mt-10 ' type="submit" value="Login"
-                    // onClick={() => {
-                    //     if (auth.user) {
-                    //         setisLogin(true)
-                    //     }
-                    // }}
+                    onClick={() => {
+                        if (auth.user !== null) { 
+                            setisLogin(true)
+                        } 
+                        
+                    }}
                 />
                 <input className='py-1 min-w-[10%] bg-green-500 px-4 rounded-sm mt-5 cursor-grab ' type="button" value="forget" onClick={() => Navigate("/forgetPassword")} />
 

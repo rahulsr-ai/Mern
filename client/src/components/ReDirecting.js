@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const ReDirecting = () => {
+const ReDirecting = ({path="login"}) => {
 
 
     const navigate = useNavigate()
@@ -19,7 +19,7 @@ const ReDirecting = () => {
         let interval = setInterval(() => {
             setCount((count) => --count)
             if (count === 0) {
-                navigate("/login")
+                navigate(`/${path}`)
             }
         }, 1000)
 
@@ -27,7 +27,7 @@ const ReDirecting = () => {
 
 
 
-    }, [count, navigate]);
+    }, [count, navigate,path]);
 
 
 
