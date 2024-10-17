@@ -4,7 +4,8 @@ import dbconnect from './Config/db.js';
 // import { User } from './Models/User.model.js';
 import router from './Routes/authRoute.js';
 import cors from 'cors'
-
+import CategoryRouter from './Routes/CategoryRoute.js';
+import Productrouter from './Routes/ProductRoute.js';
 
 dbconnect()
 let PORT = process.env.PORT || 5600;
@@ -23,6 +24,8 @@ app.use(express.json()); // This is crucial for req.body to be populated
 
 
 app.use("/api/v1/auth", router)
+app.use("/api/v1/auth/catergory", CategoryRouter)
+app.use("/api/v1/auth/product", Productrouter)
 
 
 app.get("/", (req, res) => {

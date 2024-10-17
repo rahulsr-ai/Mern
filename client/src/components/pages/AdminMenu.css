@@ -1,0 +1,15 @@
+.adminmenucontainer{
+    width: 50%;
+    height: 70vh;
+    border: 1px solid purple;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.menunavlink{
+    width: 100%;
+    height: 28px;
+    background-color: gray;
+    padding-left: 30px;
+    margin-top: 10px;
+}
