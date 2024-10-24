@@ -26,7 +26,7 @@ const Header01 = () => {
             <div className='flex items-center  p-2 gap-7 '>
 
                 <Link to="/"> Home </Link>
-                <Link to="/*"> Categories </Link>
+                <Link to="/category"> Categories </Link>
                 <Link to="/register"> Register </Link>
 
 

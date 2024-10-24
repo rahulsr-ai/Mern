@@ -3,7 +3,7 @@ import ProductModel from "../Models/ProductModel.js"
 import fs from "fs"
 import slugify from "slugify"
 
-// creating product in the database 
+// CREATING product in the database 
 export async function postProductController(req, res) {
 
     try {
@@ -120,7 +120,7 @@ export async function GetProductController(req, res) {
 
 
 
-// Get single Product
+// GETTING single Product
 
 export async function GetSingleProductController(req, res) {
     try {
@@ -183,7 +183,7 @@ export async function GetSingleProductController(req, res) {
 
 
 
-// fetching photo 
+// Fetching single product PHOTO 
 export const ProductPhotoController = async (req, res) => {
     try {
 
@@ -213,7 +213,7 @@ export const ProductPhotoController = async (req, res) => {
 
 
 
-// Updating product data 
+// UPDATING product data 
 export async function UpdateProductData(req, res) {
 
     try {
@@ -302,7 +302,7 @@ export async function UpdateProductData(req, res) {
 
 
 
-// deleting route for product 
+// Deleting route for product 
 export const ProductDeleteController = async (req, res) => {
     try {
 

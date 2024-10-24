@@ -30,11 +30,11 @@ import Order from './components/user/Order'
 
 const App = () => {
   const [isLogin, setisLogin] = useAuth()
-  useEffect(()=> { 
-  
-    
+  useEffect(() => {
 
-  },[isLogin])
+
+
+  }, [isLogin])
 
 
   return (
@@ -48,26 +48,28 @@ const App = () => {
           <Route path="/" element={<Homepage />} />
           <Route path="/policy" element={<Policy />} />
 
-        
+
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<Dashboard />} />
             <Route path="user/profile" element={<Profile />} />
             <Route path="user/order" element={<Order />} />
           </Route>
+
+
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
-
             <Route path="admin/categories" element={<Categories />} />
             <Route path="admin/product" element={<Products />} />
             <Route path="admin/users" element={<Users />} />
-
           </Route>
+
 
           <Route path="/*" element={<PagenotFound />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/forgetPassword" element={<ForgetPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/PassChange" element={<PassChange />} />
+          {/* <Route path="/category" element={<Categories />} /> */}
 
         </Routes>
       </BrowserRouter>
