@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AdminMenu from '../AdminMenu'
 import { useEffect } from 'react'
 import axios from "axios"
-import CrateCategory from './CrateCategory'
+import CreateCategory from "./CreateCategory"
 import toast from 'react-hot-toast'
 
 import { Button, Modal } from 'antd';
@@ -10,19 +10,14 @@ import { Button, Modal } from 'antd';
 
 const Categories = () => {
     const [item, setItem] = useState([])
-
     const [name, setName] = useState("")
+    const [select, setSelect] = useState(null)
+
+    const [updateName, setUpdateName] = useState("")
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+
+
 
 
     const getAllCategories = async () => {
@@ -34,7 +29,7 @@ const Categories = () => {
                 // setItem( [...item, data.category])
                 // setItem(() => [...item, ...data.category])
                 setItem(data.category)
-                console.log(item)
+                // console.log(item)
             }
 
 
@@ -64,11 +59,45 @@ const Categories = () => {
     }
 
 
+
+
+
+
+
     useEffect(() => {
         getAllCategories()
 
     }, [])
 
+
+
+
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        try {
+            // console.log(select);
+            const { data } = await axios.put(`/api/v1/auth/catergory/update-category/${select._id}`, { name: updateName })
+
+            if (data?.success) {
+                toast.success(`${updateName} is updated`)
+                setSelect(null)
+                setUpdateName("")
+                setIsModalOpen(false)
+                getAllCategories()
+
+            } else {
+                toast.error("error while Updating category")
+            }
+
+
+
+        } catch (error) {
+            console.log("something went wrong while editing user categories");
+            console.log(error);
+
+        }
+    }
 
     return (
         <div className="flex shadow-md rounded mx-auto my-10 border-2 w-[80vw] border-green-500 dbcontainer">
@@ -84,7 +113,7 @@ const Categories = () => {
                 <h1> categories page for admin </h1>
                 {/* {item} */}
 
-                <CrateCategory submitHandler={submitHandler} setName={setName} name={name} />
+                <CreateCategory handleSubmit={submitHandler} setValue={setName} value={name} />
 
                 <table className='border-2 border-black w-full p-4 '>
                     <tr>
@@ -100,17 +129,22 @@ const Categories = () => {
                                 </td>
 
                                 <td>
-                                    <Button type="primary" onClick={showModal}>
+                                    <Button type="primary" onClick={() => { setIsModalOpen(true); setUpdateName(item.name); 
+                                         setSelect(item)
+                                    }}>
                                         Edit Category
                                     </Button>
                                 </td>
 
 
                                 <td>
-                                    <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                                        <p>Some contents...</p>
-                                        <p>Some contents...</p>
-                                        <p>Some contents...</p>
+                                    <Modal title="Edit Category" open={isModalOpen} onOk={() => setIsModalOpen(false)} onCancel={() => setIsModalOpen(false)} footer={null}
+
+                                    >
+                                        <CreateCategory value={updateName} setValue={setUpdateName}
+                                            handleSubmit={handleUpdate}
+                                        />
+
                                     </Modal>
                                 </td>
 

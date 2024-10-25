@@ -80,3 +80,42 @@ export const GetAllCategoryController = async (req, res) => {
 
     }
 }
+
+
+// updating Category controller
+export const updateCategoryController = async (req, res) => {
+
+
+
+    try {
+        const { name } = req.body
+        const { id } = req.params;
+
+
+
+
+        const data = await CategoryModel.findByIdAndUpdate(id, { name, slug: slugify(name) }, { new: true });
+
+
+
+
+
+
+
+        return res.status(200).send({
+            success: true,
+            message: "categpry updated successfully",
+            data
+        })
+
+
+    }
+    catch (error) {
+        console.log("error while updating categories");
+        res.send(400).send({
+            success: false,
+            message: error.message
+        })
+
+    }
+}
