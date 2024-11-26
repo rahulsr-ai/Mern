@@ -3,7 +3,7 @@ import { User } from "../Models/User.model.js";
 
 export const isrequired=async(req,res,next)=>{
 try {
-    const decode= JWT.verify(req.headers.authorization,process.env.secret_key);
+    const decode= JWT.verify(req.headers.authorization, process.env.secret_key);
     req.user=decode;
     next()
 } catch (error) {

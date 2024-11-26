@@ -89,12 +89,17 @@ export const updateCategoryController = async (req, res) => {
 
     try {
         const { name } = req.body
-        const { id } = req.params;
+       
+       
+        console.log(req.params.pid);
+        console.log(`name is ${name}`);
 
 
 
 
-        const data = await CategoryModel.findByIdAndUpdate(id, { name, slug: slugify(name) }, { new: true });
+
+
+        const data = await CategoryModel.findByIdAndUpdate(req.params.pid, { name, slug: slugify(name) }, { new: true });
 
 
 
@@ -118,4 +123,24 @@ export const updateCategoryController = async (req, res) => {
         })
 
     }
+}
+
+
+export const deleteCategoryController =  async (req , res ) => { 
+    try {
+         console.log(req.params.pid);
+         
+        await CategoryModel.findByIdAndDelete(req.params.pid)
+        res.status(200).send({
+            success: true,
+            message: "category deleted successfullly"
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "error while deleting the category",
+            error: error.message
+        })
+    } 
 }

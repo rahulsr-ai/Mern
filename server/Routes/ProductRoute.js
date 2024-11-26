@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.post("/create-product", isrequired, isAdmin, formidable(), postProductController)
 
+
 router.get("/get-product", GetProductController)
 
 
@@ -16,7 +17,7 @@ router.get("/Photo-Product/:pid", ProductPhotoController)
 
 router.delete("/delete-product/:pid", ProductDeleteController)
 
-router.post("/update-product/:pid", formidable(), UpdateProductData )
+router.post("/update-product/:pid", formidable(), UpdateProductData)
 
 
 export default router

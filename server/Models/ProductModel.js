@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
-    category: {
+    categoryy: {
         type: mongoose.ObjectId,
         ref: "Categories",
         require: true,
@@ -35,7 +35,8 @@ const ProductSchema = new mongoose.Schema({
         contentType: String,
 
     }, shipping: {
-        type: Boolean
+        type: String,
+        default: "0"
     }
 }, { timestamps: true })
 

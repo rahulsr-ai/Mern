@@ -7,6 +7,7 @@ import cors from 'cors'
 import CategoryRouter from './Routes/CategoryRoute.js';
 import Productrouter from './Routes/ProductRoute.js';
 
+
 dbconnect()
 let PORT = process.env.PORT || 5600;
 dotenv.config();
@@ -30,7 +31,7 @@ app.use("/api/v1/auth/product", Productrouter)
 
 app.get("/", (req, res) => {
     res.send('default page')
-})
+})  
 
 
 

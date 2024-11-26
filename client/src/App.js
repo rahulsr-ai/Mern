@@ -21,10 +21,12 @@ import AdminDashboard from './components/pages/Admin/AdminDashboard'
 
 import { useAuth } from './context/auth'
 import Categories from './components/pages/Admin/Categories'
-import Products from './components/pages/Admin/Products'
+import CreateProduct from './components/pages/Admin/CreateProduct'
 import Users from './components/pages/Admin/Users'
 import Profile from './components/user/Profile'
 import Order from './components/user/Order'
+import GetProduct from './components/pages/Admin/GetProduct'
+import UpdateProduct from './components/pages/Admin/UpdateProduct'
 
 // change
 
@@ -59,8 +61,10 @@ const App = () => {
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/categories" element={<Categories />} />
-            <Route path="admin/product" element={<Products />} />
+            <Route path="admin/product" element={<CreateProduct />} />
+            <Route path="admin/GetProduct" element={<GetProduct />} />
             <Route path="admin/users" element={<Users />} />
+            <Route path="admin/product/:slug" element={< UpdateProduct/>} />
           </Route>
 
 
@@ -74,7 +78,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
       {/* <Footer/>  */}
-      <Footer01 />
+      {/* <Footer01 /> */}
 
 
     </div>

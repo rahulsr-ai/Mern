@@ -14,6 +14,7 @@ const Categories = () => {
     const [select, setSelect] = useState(null)
 
     const [updateName, setUpdateName] = useState("")
+    const [Delete, setDelete] = useState(null)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -76,8 +77,11 @@ const Categories = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            // console.log(select);
-            const { data } = await axios.put(`/api/v1/auth/catergory/update-category/${select._id}`, { name: updateName })
+            // console.log(`/api/v1/auth/catergory/update-category/${select}`);
+            console.log(updateName);
+
+            const { data } = await axios.put(`/api/v1/auth/catergory/update-category/${select}`, { name: updateName })
+
 
             if (data?.success) {
                 toast.success(`${updateName} is updated`)
@@ -99,6 +103,45 @@ const Categories = () => {
         }
     }
 
+
+
+
+    const handleDelete = async (e) => {
+        // e.preventDefault();
+        try {
+
+
+            const { data } = await axios.delete(`/api/v1/auth/catergory/delete-category/${select}`)
+
+
+            if (data?.success) {
+                toast.success(`${Delete} is deleted`)
+                setSelect(null)
+                setDelete("")
+                setIsModalOpen(false)
+                getAllCategories()
+
+
+
+            } else {
+                toast.error("error while deleting the category")
+            }
+
+
+
+        } catch (error) {
+            console.log("error got catch something went wrong while deleting categories");
+            console.log(error);
+
+        }
+
+
+
+    }
+
+
+
+
     return (
         <div className="flex shadow-md rounded mx-auto my-10 border-2 w-[80vw] border-green-500 dbcontainer">
 
@@ -116,43 +159,105 @@ const Categories = () => {
                 <CreateCategory handleSubmit={submitHandler} setValue={setName} value={name} />
 
                 <table className='border-2 border-black w-full p-4 '>
-                    <tr>
-                        <th>name</th>
-                        <th>action</th>
-                    </tr>
-                    <tr>
-                        {item.map((item, i) => (
-
-                            <tr key={i}>
-                                <td key={item._id}>
-                                    {item.name}
-                                </td>
-
-                                <td>
-                                    <Button type="primary" onClick={() => { setIsModalOpen(true); setUpdateName(item.name); 
-                                         setSelect(item)
-                                    }}>
-                                        Edit Category
-                                    </Button>
-                                </td>
+                    <tbody>
+                        <tr>
+                            <th>name</th>
+                            <th>action</th>
+                        </tr>
 
 
-                                <td>
-                                    <Modal title="Edit Category" open={isModalOpen} onOk={() => setIsModalOpen(false)} onCancel={() => setIsModalOpen(false)} footer={null}
+                        <tr>
+                            {item.map((item, i) => (
 
-                                    >
-                                        <CreateCategory value={updateName} setValue={setUpdateName}
-                                            handleSubmit={handleUpdate}
-                                        />
+                                <tr key={i}>
+                                    <td key={item._id}>
+                                        {item.name}
+                                    </td>
 
-                                    </Modal>
-                                </td>
+                                    <td>
+                                        <Button type="primary" onClick={() => {
+                                            setIsModalOpen(true); setUpdateName(item.name);
+                                            setSelect(item._id)
 
 
-                            </tr>
+                                        }}>
+                                            Edit Category
+                                        </Button>
+                                    </td>
 
-                        ))}
-                    </tr>
+                                    <td>
+                                        <Button type="link" onClick={() => {
+                                            setIsModalOpen(true); setDelete(item.name);
+                                            setSelect(item._id)
+                                            console.log(item._id);
+
+                                        }}>
+                                            delete category
+                                        </Button>
+                                    </td>
+
+                                    {!Delete ?
+                                        <td>
+                                            <Modal title={"edit category"} open={isModalOpen}
+                                                onOk={() => {
+                                                    setDelete(null)
+                                                    return setIsModalOpen(false)
+                                                }}
+                                                onCancel={() => {
+                                                    setDelete(null)
+                                                    return setIsModalOpen(false)
+                                                }
+                                                } footer={null}
+
+                                            >
+                                                <CreateCategory value={updateName}
+                                                    setValue={setUpdateName}
+                                                    handleSubmit={handleUpdate}
+                                                />
+
+                                            </Modal>
+                                        </td> :
+                                        <td>
+
+                                            <Modal title={"Delete category"} open={isModalOpen}
+                                                onOk={() => {
+                                                    setDelete(null)
+                                                    return setIsModalOpen(false)
+                                                }}
+                                                onCancel={() => {
+                                                    setDelete(null)
+                                                    return setIsModalOpen(false)
+                                                }
+                                                } footer={null}
+
+                                            >
+                                                <div className="flex flex-col items-center justify-center gap-3">
+
+                                                    <h1 className="text-semibold ">  Do you want to delete <span className="text-red-600"> {item.name} </span> category </h1>
+
+
+                                                    <div className="p-2 space-x-4">
+                                                        <button onClick={() => { handleDelete() }} className="px-4 text-white py-1 bg-green-500 rounded " > Confirm </button>
+                                                        <button onClick={() => setIsModalOpen(false)} className="px-4 text-white py-1 bg-red-500 rounded " > Cancel </button>
+                                                    </div>
+                                                </div>
+
+
+                                            </Modal>
+
+
+                                        </td>
+                                    }
+
+
+
+
+
+                                </tr>
+
+                            ))}
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 

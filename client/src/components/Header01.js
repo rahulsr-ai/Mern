@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../context/auth'
 import toast from 'react-hot-toast';
 const Header01 = () => {
-    const [auth, setAuth, isLogin, setisLogin] = useAuth();
+    const [auth, setAuth] = useAuth();
 
 
     function logout() {
@@ -27,7 +27,9 @@ const Header01 = () => {
 
                 <Link to="/"> Home </Link>
                 <Link to="/category"> Categories </Link>
-                <Link to="/register"> Register </Link>
+
+                {!auth.user && <Link to="/register"> Register </Link>}
+
 
 
 
@@ -58,7 +60,7 @@ const Header01 = () => {
 
                                     </li>
 
-                                    <li  className="px-4 py-2 hover:bg-gray-200">
+                                    <li className="px-4 py-2 hover:bg-gray-200">
                                         <Link onClick={logout} to="/login"> LogOut </Link>
 
                                     </li>
