@@ -9,8 +9,9 @@ import axios from 'axios'
 
 const UpdateProduct = () => {
 
+    const navigate = useNavigate()
     const params = useParams()
-    const [singleProductData, setSingleProductData] = useState([])
+
 
 
     const [name, setName] = useState("")
@@ -25,19 +26,19 @@ const UpdateProduct = () => {
     const [item, setItem] = useState([])
 
 
-    const navigate = useNavigate()
 
 
+
+    
+    // single product data function to send request to backend
     async function GetSingleProduct() {
         try {
 
 
             console.log('fetching request... ');
 
-
             const { data } = await axios.get(`/api/v1/auth/product/get-product/${params.slug}`)
             console.log('request fetched successfully');
-
 
             console.log(data.Product);
 
@@ -45,41 +46,8 @@ const UpdateProduct = () => {
             setdescription(data.Product.description)
             setPrice(data.Product.price)
             setQuantity(data.Product.quantity)
-            console.log("id is ", data.Product._id);
-
-
-
             setId(data.Product._id)
             setShipping(data.Product.shipping)
-
-
-
-
-
-            // const { fetchedPhoto } = await axios.get(`/api/v1/auth/product/Photo-Product/${data.Product._id}`)
-            // console.log("photo is", fetchedPhoto);
-
-
-            // setPhoto(fetchedPhoto.data.photo)
-
-
-            // console.log(photo);
-
-
-            // console.log(data.Product.photo);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         } catch (error) {
             console.log("error while getting single product data");
@@ -88,16 +56,11 @@ const UpdateProduct = () => {
         }
     }
 
+    // --------------------------------------------------------------------------
 
 
 
-    useEffect(() => {
-        GetSingleProduct()
-        getAllCategories()
-
-    }, [])
-
-
+    // get all categories data function to send request to backend
     const getAllCategories = async () => {
         try {
             const { data } = await axios.get("/api/v1/auth/catergory/get-allCatogory")
@@ -120,9 +83,10 @@ const UpdateProduct = () => {
     }
 
 
+    // --------------------------------------------------------------------------------
 
 
-
+    // update the product data function to send request on backend
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -139,13 +103,6 @@ const UpdateProduct = () => {
             productData.append("quantity", quantity)
             productData.append("price", price)
             productData.append("categoryy", categoryy)
-
-            console.log("photo is ", photo);
-
-            console.log("name is ", name);
-            console.log("id is ", id);
-            console.log("category is ", categoryy);
-            console.log("shipping is ", shipping);
 
 
 
@@ -172,9 +129,11 @@ const UpdateProduct = () => {
     }
 
 
+    // -----------------------------------------------------------------------------------
 
 
 
+    // set image in setPhoto function 
     const onImageChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
@@ -191,6 +150,43 @@ const UpdateProduct = () => {
 
 
 
+    // ----------------------------------------------------------------
+
+
+
+    //  send delete request function to the backend  
+    const deleteProduct = async () => {
+
+        try {
+            const { data } = await axios.delete(`/api/v1/auth/product/delete-product/${id}`)
+
+            if (data?.success) {
+                toast.success("successully deleted product ")
+                navigate("/dashboard/admin/GetProduct")
+            } else {
+                toast.error("something went wrong while deleting the product")
+                console.log("something went wrong while deleting the product ");
+            }
+
+
+        } catch (error) {
+
+            console.log("failed to delete product ");
+            console.log(error);
+
+        }
+    }
+
+
+
+    useEffect(() => {
+        GetSingleProduct()
+        getAllCategories()
+
+    }, [])
+
+
+    // -------------------------------------------------------------------------------------------------------
 
 
     return (
@@ -227,9 +223,8 @@ const UpdateProduct = () => {
 
                     <img className='size-[100px] '
                         onerror={`/api/v1/auth/product/Photo-Product/${id}`}
-                        // defaultValue={`/api/v1/auth/product/Photo-Product/${id}`}
-                        src={ photo ? photo : `/api/v1/auth/product/Photo-Product/${id}` }
-                        
+                        src={photo ? photo : `/api/v1/auth/product/Photo-Product/${id}`}
+
                         alt=""
                     />
 
@@ -241,8 +236,8 @@ const UpdateProduct = () => {
                     <label htmlFor="shipping">Shipping:</label>
                     <select
                         id="shipping"
-                        value={shipping} // Bound to state
-                        onChange={(e) => setShipping(e.target.value)} // Updates state
+                        value={shipping}
+                        onChange={(e) => setShipping(e.target.value)}
                     >
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
@@ -254,28 +249,12 @@ const UpdateProduct = () => {
 
                 </div>
 
-
-
-
-
-
+                <div>
+                    <button onClick={deleteProduct}> Delete Product </button>
+                </div>
 
 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
     )
