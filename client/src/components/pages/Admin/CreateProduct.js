@@ -93,11 +93,8 @@ const CreateProduct = () => {
       console.log("photo is ", photo);
       console.log("shping is ", shiping);
 
-      const response = await axios.post("/api/v1/auth/product/create-product", productData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      const response = await axios.post("/api/v1/auth/product/create-product", productData
+      )
 
       console.log(response);
 

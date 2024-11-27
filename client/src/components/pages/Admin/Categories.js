@@ -4,11 +4,13 @@ import { useEffect } from 'react'
 import axios from "axios"
 import CreateCategory from "./CreateCategory"
 import toast from 'react-hot-toast'
-
+import { useNavigate } from 'react-router-dom'
 import { Button, Modal } from 'antd';
 
 
 const Categories = () => {
+
+    const navigate = useNavigate()
     const [item, setItem] = useState([])
     const [name, setName] = useState("")
     const [select, setSelect] = useState(null)
@@ -24,14 +26,14 @@ const Categories = () => {
     const getAllCategories = async () => {
         try {
             const { data } = await axios.get("/api/v1/auth/catergory/get-allCatogory")
-            console.log(data?.category);
+           
 
-            if (data.success) {
-                // setItem( [...item, data.category])
-                // setItem(() => [...item, ...data.category])
+            // if (data?.success) {
+               
                 setItem(data.category)
-                // console.log(item)
-            }
+                navigate("/dashboard/admin/categories")
+              
+            // }
 
 
 
