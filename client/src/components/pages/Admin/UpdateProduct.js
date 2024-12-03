@@ -5,6 +5,8 @@ import AdminMenu from '../AdminMenu'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
+
+import { Button, Modal } from 'antd';
 import axios from 'axios'
 
 const UpdateProduct = () => {
@@ -12,7 +14,7 @@ const UpdateProduct = () => {
     const navigate = useNavigate()
     const params = useParams()
 
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [name, setName] = useState("")
     const [description, setdescription] = useState("")
@@ -29,7 +31,7 @@ const UpdateProduct = () => {
 
 
 
-    
+
     // single product data function to send request to backend
     async function GetSingleProduct() {
         try {
@@ -211,7 +213,7 @@ const UpdateProduct = () => {
                         title="Select the Category"
 
                     >
-                        <option value="">select category </option>
+                        <option value="" >select category </option>
                         {item.map((product) => (
                             <option className='w-full' value={product._id}> {product.name} </option>
                         ))}
@@ -249,14 +251,46 @@ const UpdateProduct = () => {
 
                 </div>
 
-                <div>
-                    <button onClick={deleteProduct}> Delete Product </button>
-                </div>
+
+                <Modal title={"Delete Product"} open={isModalOpen}
+                    onOk={() => {
+                        return setIsModalOpen(false)
+                    }}
+                    onCancel={() => {
+                        return setIsModalOpen(false)
+                    }
+                    } footer={null}
+                    className=''
+
+                >
+
+
+                    <label htmlFor="confirmation"> Do you want to delete {name} product</label>
+
+
+
+                    <Button className='block my-3 '
+                        onClick={() => {
+                            setIsModalOpen(true)
+                            deleteProduct()
+                        }
+                        }
+                    > Confirm </Button>
+
+                </Modal>
+
+
+                <button onClick={() => {
+                    setIsModalOpen(true)
+
+                }}> Delete  </button>
+
+
 
 
             </div>
 
-        </div>
+        </div >
     )
 }
 

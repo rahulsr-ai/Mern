@@ -89,8 +89,8 @@ export const updateCategoryController = async (req, res) => {
 
     try {
         const { name } = req.body
-       
-       
+
+
         console.log(req.params.pid);
         console.log(`name is ${name}`);
 
@@ -126,10 +126,10 @@ export const updateCategoryController = async (req, res) => {
 }
 
 
-export const deleteCategoryController =  async (req , res ) => { 
+export const deleteCategoryController = async (req, res) => {
     try {
-         console.log(req.params.pid);
-         
+        console.log(req.params.pid);
+
         await CategoryModel.findByIdAndDelete(req.params.pid)
         res.status(200).send({
             success: true,
@@ -142,5 +142,24 @@ export const deleteCategoryController =  async (req , res ) => {
             message: "error while deleting the category",
             error: error.message
         })
-    } 
+    }
+}
+
+
+
+// GET SINGLE CATEGORY CONTROLLER 
+export const fetchedSingleCategory = async (req, res) => {
+    try {
+
+        const category = await CategoryModel.findById(req.params.id )
+        
+
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "error while fetching the category",
+            error: error.message
+        })
+
+    }
 }

@@ -10,7 +10,7 @@ try {
     console.log(error)
     res.send({
         success:false,
-        message:'error in middleware'
+        message:'error in middleware auths'
     })
 }
 }
