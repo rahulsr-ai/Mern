@@ -2,6 +2,7 @@ import { log } from "console"
 import ProductModel from "../Models/ProductModel.js"
 import fs from "fs"
 import slugify from "slugify"
+import { privateDecrypt } from "crypto"
 
 // CREATING product in the database 
 export const postProductController = async (req, res) => {
@@ -14,7 +15,7 @@ export const postProductController = async (req, res) => {
         console.log(req.fields);
 
 
-        console.log(photo.data);
+        // console.log(photo.data);
 
 
 
@@ -59,7 +60,7 @@ export const postProductController = async (req, res) => {
             photo.contentType = photo.path; // type 
         }
 
-        const CreatedProduct = await ProductModel({ ...req.fields,...req.files, slug: slugify(name) });
+        const CreatedProduct = await ProductModel({ ...req.fields, ...req.files, slug: slugify(name) });
         await CreatedProduct.save();
 
 
@@ -185,10 +186,12 @@ export async function GetProductController(req, res) {
 
 export async function GetSingleProductController(req, res) {
     try {
-              
+
         console.log(req.params.slug);
+
+        const Product = await ProductModel.findById(req.params.slug).select("-Photo").populate("categoryy")
+        // console.log(Product);
         
-        const Product = await ProductModel.findOne({ slug: req.params.slug }).select("-Photo").populate("categoryy")
         res.status(200).send({
             success: true,
             message: 'single product fetched',
@@ -249,9 +252,9 @@ export async function GetSingleProductController(req, res) {
 // Fetching single product PHOTO 
 export const ProductPhotoController = async (req, res) => {
     try {
-         
-         console.log(req.params.pid);
-         
+
+        console.log(req.params.pid);
+
         const product = await ProductModel.findById(req.params.pid).select("photo")
 
         console.log(product);
@@ -386,3 +389,76 @@ export const ProductDeleteController = async (req, res) => {
         })
     }
 }
+
+
+
+
+// filter Products by category 
+export const filterProductByCategory = async (req, res) => {
+    try {
+
+        const { categories, priceRange } = req.body;
+
+        console.log(categories);
+        console.log(priceRange);
+
+        let args = {
+
+        }
+
+
+        if (categories.length > 0) args.categoryy = categories;
+        if (priceRange.length > 0) args.price = { $gte: priceRange[0], $lte: priceRange[1] };
+
+        const filteredProducts = await ProductModel.find(args);
+
+        console.log('product found');
+        console.log(filteredProducts);
+
+
+
+        res.status(200).send({
+            success: true,
+            message: "successfully fetched data",
+            filteredProducts
+        })
+
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            message: "Error while filtering products by category",
+            error: error.message
+        });
+    }
+};
+
+
+
+export const searchProduct = async (req, res) => {
+
+    try {
+
+        const { keyword } = req.params
+        const products = await ProductModel.find({
+            $or: [{ name: { $regex: keyword, $options: 'i' } },
+            { description: { $regex: keyword, $options: 'i' } }
+            ],
+
+        }).select("-photo")
+
+        res.json(products)
+
+
+    } catch (error) {
+        res.status(400).send({
+            success: false,
+            message: error.message,
+            custom: "error while fecthing the searched product "
+        })
+
+    }
+
+}
+
+
+

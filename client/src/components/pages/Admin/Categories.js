@@ -25,14 +25,14 @@ const Categories = () => {
 
     const getAllCategories = async () => {
         try {
-            const { data } = await axios.get("/api/v1/auth/catergory/get-allCatogory")
-           
+            const { data } = await axios.get("/api/v1/auth/catergory/get-allCategory")
+
 
             // if (data?.success) {
-               
-                setItem(data.category)
-                navigate("/dashboard/admin/categories")
-              
+
+            setItem(data.category)
+            navigate("/dashboard/admin/categories")
+
             // }
 
 
@@ -60,9 +60,6 @@ const Categories = () => {
 
         }
     }
-
-
-
 
 
 

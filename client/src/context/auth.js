@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
         token: null, // Initialize token to null or provide a default value
 
     });
-    const [isLogin, setisLogin] = useState(false);
+  
 
     axios.defaults.headers.common['Authorization'] = auth?.token
 
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
   
 
     return (
-        <AuthContext.Provider value={[auth, setAuth, isLogin, setisLogin]}>
+        <AuthContext.Provider value={[auth, setAuth]}>
             {children} {/* Use children prop here */}
         </AuthContext.Provider>
     );

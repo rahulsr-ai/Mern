@@ -1,5 +1,6 @@
 import slugify from "slugify";
 import CategoryModel from "../Models/CategoryModel.js";
+import ProductModel from "../Models/ProductModel.js";
 
 
 export async function PostCategoryController(req, res) {
@@ -94,18 +95,7 @@ export const updateCategoryController = async (req, res) => {
         console.log(req.params.pid);
         console.log(`name is ${name}`);
 
-
-
-
-
-
         const data = await CategoryModel.findByIdAndUpdate(req.params.pid, { name, slug: slugify(name) }, { new: true });
-
-
-
-
-
-
 
         return res.status(200).send({
             success: true,
@@ -151,8 +141,8 @@ export const deleteCategoryController = async (req, res) => {
 export const fetchedSingleCategory = async (req, res) => {
     try {
 
-        const category = await CategoryModel.findById(req.params.id )
-        
+        const category = await CategoryModel.findById(req.params.id)
+
 
     } catch (error) {
         res.status(500).send({
@@ -163,3 +153,30 @@ export const fetchedSingleCategory = async (req, res) => {
 
     }
 }
+
+
+
+
+// filter Products by category 
+export const filterProductByCategory = async (req, res) => {
+    try {
+      // For GET requests, access data from req.query, not req.body
+      const { checked, radio } = await req.query;
+
+    //   const data = await ProductModel.find
+  
+      console.log("backend Processing");
+      console.log(checked);  // Should show the value sent in the GET request
+      console.log(radio);   // Should show the value sent in the GET request
+      
+      res.json({ message: "Data received", checked, radio: radio });
+  
+    } catch (error) {
+      res.status(500).send({
+        success: false,
+        message: "Error while filtering products by category",
+        error: error.message
+      });
+    }
+  };
+  

@@ -27,6 +27,17 @@ import Profile from './components/user/Profile'
 import Order from './components/user/Order'
 import GetProduct from './components/pages/Admin/GetProduct'
 import UpdateProduct from './components/pages/Admin/UpdateProduct'
+import SearchPage from './components/pages/Search'
+
+import NavScrollExample from "./components/BootStrap/NavScrollExample"
+import OffcanvasExample from './components/BootStrap/BootstrapNavbar'
+import BootstrapNavbar from './components/BootStrap/BootstrapNavbar'
+import OffcanvasExample02 from './components/BootStrap/AnotherNavbar'
+import MyNavbar from './components/BootStrap/AnotherNavbar'
+import Productdetails from './components/pages/Product-details'
+
+
+
 
 // change
 
@@ -40,14 +51,25 @@ const App = () => {
 
 
   return (
+
+
     <div className='min-h-screen w-full p-0 m-0 relative '>
 
       <BrowserRouter>
+
         <Header01></Header01>
         {/* <Header /> */}
+ 
+        {/* <OffcanvasExample02/> */}
+        {/* <MyNavbar/> */}
+        {/* <NavScrollExample /> */}
+        {/* <OffcanvasExample /> */}
+        {/* <BootstrapNavbar/> */}
+
         <Routes>
 
           <Route path="/" element={<Homepage />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/policy" element={<Policy />} />
 
 
@@ -55,6 +77,8 @@ const App = () => {
             <Route path="user" element={<Dashboard />} />
             <Route path="user/profile" element={<Profile />} />
             <Route path="user/order" element={<Order />} />
+            <Route path="user/Product-details" element={<Productdetails/>} />
+
           </Route>
 
 
@@ -64,7 +88,7 @@ const App = () => {
             <Route path="admin/product" element={<CreateProduct />} />
             <Route path="admin/GetProduct" element={<GetProduct />} />
             <Route path="admin/users" element={<Users />} />
-            <Route path="admin/product/:slug" element={< UpdateProduct/>} />
+            <Route path="admin/product/:slug" element={< UpdateProduct />} />
           </Route>
 
 
@@ -82,6 +106,8 @@ const App = () => {
 
 
     </div>
+
+
   )
 }
 

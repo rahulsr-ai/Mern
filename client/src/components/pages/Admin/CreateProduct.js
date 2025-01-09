@@ -28,7 +28,7 @@ const CreateProduct = () => {
 
   const getAllCategories = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/catergory/get-allCatogory")
+      const { data } = await axios.get("/api/v1/auth/catergory/get-allCategory")
       console.log(data?.category);
 
       if (data.success) {
